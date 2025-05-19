@@ -1,3 +1,41 @@
+ #navbar {
+  display: flex;               /* Coloca tudo na mesma linha, lado a lado */
+  justify-content: space-between; /* Espaça os itens para ficarem nas extremidades (esquerda e direita) */
+  align-items: center;         /* Alinha os itens verticalmente no meio */
+  padding: 1rem 2rem;          /* Dá espaço interno em cima/baixo (1rem) e nas laterais (2rem) */
+  background-color: #121212;   /* Cor de fundo escura (quase preto) */
+}
+
+#navbar h2 a {
+  display: flex;              /* Coloca o texto e ícone do link na mesma linha */
+  align-items: center;        /* Alinha eles verticalmente no meio */
+  gap: 0.5rem;                /* Espaço entre o texto e o ícone */
+}
+
+#navbar form {
+  display: flex;              /* Deixa os elementos do formulário (input e botão) na mesma linha */
+  gap: 0.5rem;                /* Espaço entre o input e o botão */
+}
+
+#navbar input {
+  padding: 0.2rem 0.8rem;     /* Espaço interno pequeno para o texto dentro do input */
+  border-radius: 4px;         /* Bordas arredondadas */
+  border: none;               /* Sem borda */
+}
+
+#navbar form button {
+  background-color: #f7d354;  /* Cor de fundo amarelo claro */
+  border: 2px solid #f7d354;  /* Borda da mesma cor do fundo (amarelo) */
+  border-radius: 4px;         /* Cantos arredondados */
+  color: #000;                /* Cor do texto preta */
+  padding: 0.3rem;            /* Espaço interno do botão */
+  font-size: 1.3rem;          /* Tamanho da fonte maior */
+  display: flex;              /* Deixa o conteúdo do botão em linha (útil para ícones) */
+  align-items: center;        /* Alinha o conteúdo do botão verticalmente no centro */
+  cursor: pointer;            /* Muda o cursor para a mãozinha quando passa em cima */
+}
+*/
+ 
 #navbar {
   display: flex;
   justify-content: space-between;

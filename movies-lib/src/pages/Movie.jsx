@@ -1,76 +1,54 @@
-import { useEffect, useState } from "react";
+// Importamos React e ferramentas úteis
+import React, { useEffect, useState } from "react";
+
+// useParams permite pegar o "id" do filme que está na URL
 import { useParams } from "react-router-dom";
-import {
-  BsGraphUp,
-  BsWallet2,
-  BsHourglassSplit,
-  BsFillFileEarmarkTextFill,
-} from "react-icons/bs";
 
-import MovieCard from "../components/MovieCard";
+// Função que busca os detalhes de um filme específico
+import { getMovieDetails } from "../services/movieService";
 
-import "./Movie.css";
-
-const moviesURL = import.meta.env.VITE_API;
-const apiKey = import.meta.env.VITE_API_KEY;
-
-const Movie = () => {
+// Componente que mostra os detalhes de um filme
+function Movie() {
+  // Pegamos o id do filme a partir da URL
   const { id } = useParams();
+
+  // Criamos uma "caixinha" para guardar os dados do filme
   const [movie, setMovie] = useState(null);
 
-  const getMovie = async (url) => {
-    const res = await fetch(url);
-    const data = await res.json();
-    console.log(data);
-    setMovie(data);
-  };
-
-  const formatCurrency = (number) => {
-    return number.toLocaleString("en-US", {
-      style: "currency",
-      currency: "USD",
-    });
-  };
-
+  // Isso aqui roda automaticamente quando o componente é aberto ou quando o id muda
   useEffect(() => {
-    const movieUrl = `${moviesURL}${id}?${apiKey}`;
-    getMovie(movieUrl);
-  }, []);
+    async function fetchData() {
+      const data = await getMovieDetails(id); // Pegamos os dados do filme usando o ID
+      setMovie(data); // Guardamos os dados na nossa caixinha
+    }
 
+    fetchData(); // Chamamos a função para buscar os dados
+  }, [id]); // Sempre que o ID mudar, isso roda de novo
+
+  // Se os dados ainda não chegaram, mostramos uma mensagem
+  if (!movie) {
+    return <div>Carregando...</div>;
+  }
+
+  // Quando os dados estiverem prontos, mostramos tudo isso
   return (
-    <div className="movie-page">
-      {movie && (
-        <>
-          <MovieCard movie={movie} showLink={false} />
-          <p className="tagline">{movie.tagline}</p>
-          <div className="info">
-            <h3>
-              <BsWallet2 /> Orçamento:
-            </h3>
-            <p>{formatCurrency(movie.budget)}</p>
-          </div>
-          <div className="info">
-            <h3>
-              <BsGraphUp /> Receita:
-            </h3>
-            <p>{formatCurrency(movie.revenue)}</p>
-          </div>
-          <div className="info">
-            <h3>
-              <BsHourglassSplit /> Duração:
-            </h3>
-            <p>{movie.runtime} minutos</p>
-          </div>
-          <div className="info description">
-            <h3>
-              <BsFillFileEarmarkTextFill /> Descrição:
-            </h3>
-            <p>{movie.overview}</p>
-          </div>
-        </>
-      )}
+    <div className="container">
+      <h1>{movie.title}</h1>
+
+      {/* Mostramos a imagem do pôster */}
+      <img
+        src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+        alt={movie.title}
+      />
+
+      {/* Mostramos o resumo da história do filme */}
+      <p>{movie.overview}</p>
+
+      {/* Mostramos a nota do filme */}
+      <strong>Nota: {movie.vote_average}</strong>
     </div>
   );
-};
+}
 
+// Exportamos esse componente para ser usado no App.js
 export default Movie;

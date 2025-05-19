@@ -1,3 +1,7 @@
+/* 
+.app-container:
+- Define o fundo da aplicação como preto (#000), criando um fundo escuro para todo o conteúdo dentro desse container
+*/
 .app-container {
   background-color: #000;
 }

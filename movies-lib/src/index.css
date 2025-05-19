@@ -1,3 +1,9 @@
+/* 
+* (asterisco) seleciona todos os elementos:
+- Define a fonte padrão Helvetica para toda a página
+- Remove margens e paddings padrão para evitar espaçamentos indesejados
+- box-sizing: border-box para que padding e border sejam incluídos na largura e altura dos elementos (facilita controle de layout)
+*/
 * {
   font-family: Helvetica;
   margin: 0;
@@ -5,16 +11,30 @@
   box-sizing: border-box;
 }
 
+/* 
+body:
+- Define o fundo do corpo da página como preto (#000)
+*/
 body {
   background-color: #000;
 }
 
+/* 
+a (links):
+- Remove sublinhado padrão (text-decoration: none)
+- Cor amarelo/dourada (#f7d354)
+- Transição suave de 0.5s para mudanças de cor no hover
+*/
 a {
   text-decoration: none;
   color: #f7d354;
   transition: 0.5s;
 }
 
+/* 
+a:hover:
+- Quando o mouse passa sobre o link, a cor muda para tom mais escuro de amarelo (#b8930c)
+*/
 a:hover {
   color: #b8930c;
 }

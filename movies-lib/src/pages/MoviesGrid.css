@@ -1,3 +1,9 @@
+/* 
+.container .title:
+- Título principal com cor branca, tamanho grande (2.5rem)
+- Texto centralizado
+- Margem superior de 2rem e inferior de 1rem para espaçamento
+*/
 .container .title {
   color: #fff;
   font-size: 2.5rem;
@@ -5,10 +11,22 @@
   margin: 2rem 0 1rem;
 }
 
+/* 
+.title .query-text:
+- Texto com destaque na cor amarela/dourada (#f7d354)
+*/
 .title .query-text {
   color: #f7d354;
 }
 
+/* 
+.movies-container:
+- Container flexível que agrupa os filmes
+- Permite quebra de linha (wrap)
+- Espaçamento entre os itens (justify-content: space-between)
+- Padding interno de 2rem
+- Largura máxima de 1200px e centralizado na página
+*/
 .movies-container {
   display: flex;
   flex-wrap: wrap;
@@ -18,6 +36,16 @@
   margin: 0 auto;
 }
 
+/* 
+.movies-container div:
+- Cada filme ocupa 30% da largura do container
+- Texto branco
+- Espaço inferior de 2.5rem para separar os cards
+- Exibe o conteúdo em coluna (flex-direction: column)
+- Espaçamento vertical dentro do card (justify-content: space-between)
+- Fundo escuro (#111) para destacar o card
+- Padding interno de 1rem para não grudar no limite
+*/
 .movies-container div {
   width: 30%;
   color: #fff;
@@ -29,23 +57,46 @@
   padding: 1rem;
 }
 
+/* 
+.movies-container div img:
+- Imagem do filme com largura máxima de 100% para ajustar ao card
+*/
 .movies-container div img {
   max-width: 100%;
 }
 
+/* 
+.movies-container div img, p:
+- Espaço inferior de 1rem para imagem e parágrafos
+*/
 .movies-container div img,
 .movies-container div p {
   margin-bottom: 1rem;
 }
 
+/* 
+.movies-container div h2:
+- Título do filme com margem inferior maior (1.5rem) para separar do conteúdo abaixo
+*/
 .movies-container div h2 {
   margin-bottom: 1.5rem;
 }
 
+/* 
+.movies-container div svg:
+- Ícones dentro do card com cor amarela para destaque
+*/
 .movies-container div svg {
   color: #f7d354;
 }
 
+/* 
+.movies-container div a:
+- Botão/link com fundo amarelo e borda arredondada
+- Cor do texto preta para contraste
+- Padding para área clicável confortável
+- Texto centralizado e em negrito
+*/
 .movies-container div a {
   background-color: #f7d354;
   border: 2px solid #f7d354;
@@ -56,6 +107,11 @@
   font-weight: bold;
 }
 
+/* 
+.movies-container div a:hover:
+- Ao passar o mouse, o botão fica transparente
+- Texto muda para amarelo para indicar ação
+*/
 .movies-container div a:hover {
   background-color: transparent;
   color: #f7d354;

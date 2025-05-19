@@ -1,37 +1,49 @@
-import { useEffect, useState } from "react";
-import MovieCard from "../components/MovieCard";
+// Estamos importando o React para criar o componente
+import React, { useEffect, useState } from "react";
 
-import "./MoviesGrid.css";
+// Importamos uma ferramenta do React Router que ajuda a navegar entre as páginas
+import { Link } from "react-router-dom";
 
-const moviesURL = import.meta.env.VITE_API;
-const apiKey = import.meta.env.VITE_API_KEY;
+// Importamos nossa função que pega os filmes do serviço (API)
+import { getPopularMovies } from "../services/movieService";
 
-const Home = () => {
-  const [topMovies, setTopMovies] = useState([]);
+// Aqui criamos o componente chamado "Home"
+function Home() {
+  // Aqui guardamos a lista de filmes em uma "caixinha mágica" chamada estado (state)
+  const [movies, setMovies] = useState([]);
 
-  const getTopRatedMovies = async (url) => {
-    const res = await fetch(url);
-    const data = await res.json();
-    setTopMovies(data.results);
-  };
-
+  // Esse bloco roda automaticamente quando a página é aberta
   useEffect(() => {
-    const topRatedUrl = `${moviesURL}top_rated?${apiKey}`;
-    console.log(topRatedUrl);
-    getTopRatedMovies(topRatedUrl);
-  }, []);
+    // Chamamos a função que busca os filmes populares
+    async function fetchData() {
+      const data = await getPopularMovies(); // Esperamos os dados chegarem
+      setMovies(data.results); // Colocamos os filmes na nossa caixinha
+    }
 
-  console.log(topMovies);
+    fetchData(); // Chamamos a função que busca os filmes
+  }, []); // Esse colchete vazio significa que isso só vai acontecer 1 vez quando a página carregar
 
+  // Aqui mostramos os filmes na tela
   return (
     <div className="container">
-      <h2 className="title">Melhores filmes:</h2>
-      <div className="movies-container">
-        {topMovies.length > 0 &&
-          topMovies.map((movie) => <MovieCard key={movie.id} movie={movie} />)}
+      <h1>Filmes Populares</h1>
+
+      {/* Aqui criamos um quadradinho para cada filme usando .map */}
+      <div className="movie-grid">
+        {movies.map((movie) => (
+          // Cada filme é um Link clicável que leva para a página do filme
+          <Link to={`/movie/${movie.id}`} key={movie.id}>
+            <img
+              src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`} // Mostra o pôster do filme
+              alt={movie.title}
+            />
+            <h2>{movie.title}</h2> {/* Mostra o nome do filme */}
+          </Link>
+        ))}
       </div>
     </div>
   );
-};
+}
 
+// Aqui exportamos o componente para que ele possa ser usado no App.js
 export default Home;
